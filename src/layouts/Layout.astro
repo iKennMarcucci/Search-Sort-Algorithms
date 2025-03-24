@@ -15,6 +15,10 @@ const lang = getLangFromUrl(Astro.url);
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="theme-color" content="#000000" />
+		<meta name="theme-color" content="#fff" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Search and Sort Algorithms</title>
@@ -32,6 +36,10 @@ const lang = getLangFromUrl(Astro.url);
 </html>
 
 <style is:global>
+	html {
+		background-color: black;
+	}
+
 	body {
 		font-family: "Onest", sans-serif;
 	}
