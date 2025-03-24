@@ -1,0 +1,68 @@
+---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import NotationInfo from "../../components/ui/NotationInfo.astro";
+import ComplexInfo from "../../components/ui/ComplexInfo.astro";
+import CardIndex from "../../components/ui/CardIndex.astro";
+import Bracket from "../../../public/icons/Bracket.astro";
+import Brain from "../../../public/icons/Brain.astro";
+import Clock from "../../../public/icons/Clock.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// {t("navbar.search")}
+
+const IntroContent = [
+	{
+		title: t("index.intro1.title"),
+		description: t("index.intro1.desc"),
+		Icon: Brain,
+	},
+	{
+		title: t("index.intro2.title"),
+		description: t("index.intro2.desc"),
+		Icon: Clock,
+	},
+	{
+		title: t("index.intro3.title"),
+		description: t("index.intro3.desc"),
+		Icon: Bracket,
+	},
+];
+---
+
+<Layout>
+	<main class="container max-w-5xl mx-auto gap-8 my-40">
+		<section class="flex flex-col text-center gap-4 p-4">
+			<h1 class="font-black text-5xl">{t("index.title")}</h1>
+			<p class="text-white/75 text-xl">
+				{t("index.desc")}
+			</p>
+
+			<div class="grid grid-cols-3 max-sm:grid-cols-1 gap-4 mt-8 text-lg">
+				{
+					IntroContent.map(({ title, description, Icon }) => (
+						<CardIndex
+							title={title}
+							description={description}
+							Icon={Icon}
+						/>
+					))
+				}
+			</div>
+		</section>
+	</main>
+
+	<main class="bg-black/40 w-full py-20">
+		<section class="container max-w-5xl mx-auto gap-8 p-4">
+			<h2 class="font-black text-3xl text-start">
+				{t("index.bigO.title")}
+			</h2>
+			<div class="grid grid-cols-2 max-sm:grid-cols-1 gap-4 mt-8 text-lg">
+				<NotationInfo />
+				<ComplexInfo />
+			</div>
+		</section>
+	</main>
+</Layout>

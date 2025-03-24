@@ -1,0 +1,28 @@
+---
+import { SortAlgorithms } from "../../components/code/Sort";
+import AlgorithmCard from "../../components/ui/AlgorithmCard.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+// {t("footer.with")}
+---
+
+<Layout>
+   <main class="max-w-5xl mx-auto flex flex-col items-start w-full">
+      <section class="flex flex-col text-start gap-4 px-4 py-20">
+         <div class="flex flex-col gap-8">
+            <h2 class="font-black text-3xl">{t("alg.title2")}</h2>
+            <p class="text-white/75 font-light">
+               {t("alg.desc2")}
+            </p>
+         </div>
+         {
+            SortAlgorithms(lang).map((algorithm, index) => (
+               <AlgorithmCard {...algorithm} index={index} />
+            ))
+         }
+      </section>
+   </main>
+</Layout>
