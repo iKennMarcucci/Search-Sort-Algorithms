@@ -1,0 +1,67 @@
+---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import Portfolio from "../../../public/icons/Portfolio.astro";
+import LinkedIn from "../../../public/icons/LinkedIn.astro";
+import Bracket from "../../../public/icons/Bracket.astro";
+import Github from "../../../public/icons/Github.astro";
+import Heart from "../../../public/icons/Heart.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<footer
+   class="bg-black/40 border-white/10 backdrop-blur-sm py-10 relative bottom-0 w-full border-t select-none"
+>
+   <div
+      class="max-w-5xl mx-auto flex justify-between items-center gap-4 max-lg:flex-col px-4"
+   >
+      <div
+         class="flex flex-col justify-center items-start gap-2 max-lg:items-center"
+      >
+         <h5 class="text-purple-400 text-xl font-bold max-lg:text-center">
+            {t("footer.title")}
+         </h5>
+         <p class="text-white/75 max-lg:text-center">
+            {t("footer.desc")}
+         </p>
+         <span class="text-white/75 flex text-xs">
+            <Bracket size={18} stroke={2} />&nbsp;{t("footer.with")}&nbsp;
+            <Heart size={18} stroke={2} />
+            &nbsp;{t("footer.by")}&nbsp;<b>Kenn&nbsp;Marcucci</b>
+         </span>
+      </div>
+
+      <div
+         class="flex flex-col justify-center items-end gap-2 max-lg:items-center"
+      >
+         <ul class="flex gap-2 justify-center items-center">
+            <a
+               href="https://www.linkedin.com/in/kennmarcucci/"
+               target="_blank"
+               class="text-white/50 hover:text-purple-400/100 duration-150 aspect-square p-2 rounded-full"
+               ><LinkedIn size={24} /></a
+            >
+            <a
+               href="https://github.com/iKennMarcucci"
+               target="_blank"
+               class="text-white/50 hover:text-purple-400/100 duration-150 aspect-square p-2 rounded-full"
+               ><Github size={24} /></a
+            >
+            <a
+               href="https://kennmarcucci.vercel.app/es"
+               target="_blank"
+               class="text-white/50 hover:text-purple-400/100 duration-150 aspect-square p-2 rounded-full"
+               ><Portfolio size={24} /></a
+            >
+         </ul>
+         <p
+            class="text-white/70 text-sm text-end max-lg:mt-10 max-lg:text-center"
+         >
+            &copy; {t("footer.title")} ({
+               new Date().getFullYear()
+            }). {t("footer.rights")}.
+         </p>
+      </div>
+   </div>
+</footer>

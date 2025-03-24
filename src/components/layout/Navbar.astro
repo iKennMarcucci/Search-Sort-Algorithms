@@ -1,0 +1,47 @@
+---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import Search from "../../../public/icons/Search.astro";
+import Earth from "../../../public/icons/Earth.astro";
+import Sort from "../../../public/icons/Sort.astro";
+import Button from "../ui/Button.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<header
+   class="border-white/10 bg-black/40 backdrop-blur-sm border-b py-4 select-none"
+>
+   <nav class="max-w-5xl mx-auto flex justify-between items-center px-4">
+      <a href={`/${lang}`} class="max-sm:hidden">
+         <img
+            src={"../../../public/logos/long_logo.svg"}
+            alt="long_logo"
+            class="h-12"
+         />
+      </a>
+
+      <a href={`/${lang}`} class="sm:hidden">
+         <img
+            src="../../../public/logos/short_logo.svg"
+            alt="short_logo"
+            class="h-12"
+         />
+      </a>
+      <div class="flex gap-4">
+         <a
+            class="hover:text-purple-400 flex items-center duration-150 gap-2"
+            href={`/${lang}/search`}
+            ><Search size={16} stroke={2.5} />{t("navbar.search")}</a
+         >
+         <a
+            class="hover:text-purple-400 flex items-center duration-150 gap-2"
+            href={`/${lang}/sort`}><Sort size={16} stroke={2.5} />{t("navbar.sort")}</a
+         >
+         <Button>
+            <Earth slot={"before"} size={16} />
+            {t("navbar.languaje")}
+         </Button>
+      </div>
+   </nav>
+</header>
