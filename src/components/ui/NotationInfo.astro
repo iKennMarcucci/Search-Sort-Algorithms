@@ -1,0 +1,27 @@
+---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+---
+
+<div
+   class="bg-white/5 backdrop-blur-3xl rounded-lg lg:min-w-60 p-6 flex flex-col items-start gap-4 text-base"
+>
+   <h4 class="text-white font-bold text-xl">{t("index.bigO.card1.title")}</h4>
+   <p class="text-white/60 font-light">
+      {t("index.bigO.card1.desc")}
+   </p>
+   <h5 class="text-purple-400 text-lg font-bold">
+      {t("index.bigO.card1.subtitle")}
+   </h5>
+   <ul class="list-disc list-inside tracking-wide">
+      <li>O(1) - {t("index.bigO.card1.list1")}</li>
+      <li>O(log n) - {t("index.bigO.card1.list2")}</li>
+      <li>O(n) - {t("index.bigO.card1.list3")}</li>
+      <li>O(n log n) - {t("index.bigO.card1.list4")}</li>
+      <li>O(n<sup>2</sup>) - {t("index.bigO.card1.list5")}</li>
+      <li>O(2<sup>n</sup>) - {t("index.bigO.card1.list6")}</li>
+   </ul>
+</div>

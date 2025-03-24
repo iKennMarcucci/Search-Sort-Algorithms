@@ -1,0 +1,56 @@
+---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import AlgorithmCode from "./AlgorithmCode.astro";
+import ComplexCard from "./ComplexCard.astro";
+
+interface Props {
+   index: number;
+   title: string;
+   description: string;
+   temporalComplexity: string;
+   spatialComplexity: string;
+   implementation: {
+      java: string;
+      python: string;
+      javascript: string;
+      typescript: string;
+      go: string;
+      c: string;
+      cpp: string;
+      csharp: string;
+   };
+}
+
+const {
+   title,
+   description,
+   temporalComplexity,
+   spatialComplexity,
+   implementation,
+   index,
+} = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+---
+
+<div class="bg-white/5 space-y-4 rounded-lg p-6">
+   <h3 class="font-medium text-xl">
+      {title}
+   </h3>
+
+   <p class="text-white/60 text-base font-light">
+      {description}
+   </p>
+
+   <div class="bg-black/50 rounded-lg p-4 space-y-4">
+      <h5 class="text-purple-400 text-base font-medium">{t("alg.complex")}</h5>
+      <ComplexCard
+         temporalComplexity={temporalComplexity}
+         spatialComplexity={spatialComplexity}
+      />
+   </div>
+
+   <AlgorithmCode implementation={implementation} index={index} />
+</div>

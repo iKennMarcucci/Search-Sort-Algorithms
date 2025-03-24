@@ -1,0 +1,29 @@
+---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+---
+
+<div
+   class="bg-white/5 backdrop-blur-3xl rounded-lg lg:min-w-60 p-6 flex flex-col items-start gap-4 text-base"
+>
+   <h4 class="text-white font-bold text-xl">
+      {t("index.bigO.card2.title")}
+   </h4>
+
+   <h5 class="text-purple-400 text-lg font-bold">
+      {t("index.bigO.card2.subtitle1")}
+   </h5>
+   <p class="text-white/60 font-light">
+      {t("index.bigO.card2.desc1")}
+   </p>
+
+   <h5 class="text-purple-400 text-lg font-bold">
+      {t("index.bigO.card2.subtitle2")}
+   </h5>
+   <p class="text-white/60 font-light">
+      {t("index.bigO.card2.desc2")}
+   </p>
+</div>

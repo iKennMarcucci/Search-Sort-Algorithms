@@ -1,0 +1,26 @@
+---
+import { getLangFromUrl } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+let toRedirect = "";
+
+switch (lang) {
+   case "es":
+      toRedirect = `/en${currentPath.replace(/^\/es/, '')}`;
+      break;
+
+   case "en":
+      toRedirect = `/es${currentPath.replace(/^\/en/, '')}`;
+      break;
+}
+---
+
+<a
+   href={toRedirect}
+   class="bg-purple-950/50 hover:bg-purple-950/75 border-purple-800 text-purple-300 duration-150 items-center justify-center border cursor-pointer rounded-md flex gap-2 px-2.5 py-1.5"
+>
+   <slot name="before" />
+   <slot />
+   <slot name="after" />
+</a>

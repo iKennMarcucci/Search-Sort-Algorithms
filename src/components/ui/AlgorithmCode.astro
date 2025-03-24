@@ -1,0 +1,111 @@
+---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { languages } from "../code/Languajes";
+
+interface Props {
+   implementation: {
+      java: string;
+      python: string;
+      javascript: string;
+      typescript: string;
+      go: string;
+      c: string;
+      cpp: string;
+      csharp: string;
+   };
+   index: number;
+}
+
+const { implementation, index } = Astro.props;
+
+const dynamicStyles = `
+   /* Mostrar contenido según el input checked */
+   #java-${index}:checked ~ .content-wrapper #content-java-${index},
+   #python-${index}:checked ~ .content-wrapper #content-python-${index},
+   #javascript-${index}:checked ~ .content-wrapper #content-javascript-${index},
+   #typescript-${index}:checked ~ .content-wrapper #content-typescript-${index},
+   #go-${index}:checked ~ .content-wrapper #content-go-${index},
+   #c-${index}:checked ~ .content-wrapper #content-c-${index},
+   #cpp-${index}:checked ~ .content-wrapper #content-cpp-${index},
+   #csharp-${index}:checked ~ .content-wrapper #content-csharp-${index} {
+      display: inline-block;
+   }
+
+   /* Cambiar color del label activo usando :has() en el contenedor */
+   .tabs-container-${index}:has(input#java-${index}:checked) .flex.gap-2 label[for="java-${index}"],
+   .tabs-container-${index}:has(input#python-${index}:checked) .flex.gap-2 label[for="python-${index}"],
+   .tabs-container-${index}:has(input#javascript-${index}:checked) .flex.gap-2 label[for="javascript-${index}"],
+   .tabs-container-${index}:has(input#typescript-${index}:checked) .flex.gap-2 label[for="typescript-${index}"],
+   .tabs-container-${index}:has(input#go-${index}:checked) .flex.gap-2 label[for="go-${index}"],
+   .tabs-container-${index}:has(input#c-${index}:checked) .flex.gap-2 label[for="c-${index}"],
+   .tabs-container-${index}:has(input#cpp-${index}:checked) .flex.gap-2 label[for="cpp-${index}"],
+   .tabs-container-${index}:has(input#csharp-${index}:checked) .flex.gap-2 label[for="csharp-${index}"] {
+      background-color: color-mix(in oklab, #442363 30%, transparent);
+      border-color: #6e11b0;
+      color: #dab2ff;
+   }
+`;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+---
+
+<div class={`bg-black/50 rounded-lg relative tabs-container-${index}`}>
+   <div class="border-white/10 flex justify-between items-center border-b p-4">
+      <h5 class="text-purple-400 text-base font-medium mr-5">
+         {t("alg.implement")}
+      </h5>
+
+      <div class="flex gap-2">
+         {
+            languages.map((lang) => (
+               <label
+                  for={`${lang.id}-${index}`}
+                  class="hover:bg-purple-500/20 cursor-pointer px-3 py-1 text-sm rounded-md transition-colors select-none border border-transparent 
+                  max-[817px]:hidden"
+               >
+                  {lang.label}
+               </label>
+            ))
+         }
+      </div>
+   </div>
+
+   {
+      languages.map((lang) => (
+         <input
+            type="radio"
+            id={`${lang.id}-${index}`}
+            name={`tabs-${index}`}
+            class="hidden"
+            checked={lang.id === "java"}
+            set:html={lang.id === "java" ? "checked" : ""}
+         />
+      ))
+   }
+   <!-- esta parte es la que necesito que sea responsive, el div no se ajusta al tamaño de la pantalla, cuando la pantalla es pequeña, el div se sale de la pantalla -->
+   <div class="content-wrapper overflow-hidden overflow-x-auto mx-5">
+      {
+         languages.map((lang) => (
+            <code
+               id={`content-${lang.id}-${index}`}
+               class="content w-0 whitespace-pre"
+            >
+               {implementation[lang.id as keyof typeof implementation]}
+            </code>
+         ))
+      }
+   </div>
+</div>
+<style set:html={dynamicStyles}></style>
+
+<style>
+   .content {
+      display: none;
+   }
+
+   input[type="radio"] {
+      display: none;
+   }
+</style>

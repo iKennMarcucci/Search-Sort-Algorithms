@@ -1,0 +1,29 @@
+---
+import ArrowUp from "../../../public/icons/ArrowUp.astro";
+---
+
+<button
+   id="scrollToTop"
+   class="bg-purple-950/50 hover:bg-purple-950/75 border-purple-800 text-purple-300 border appearEffect fixed bottom-4
+   max-sm:bottom-16 right-4 p-2 rounded-full shadow-lg duration-150 focus:ring focus:ring-offset-2 z-50 hidden backdrop-blur-xl"
+>
+   <ArrowUp size={24} stroke={2} />
+</button>
+
+<script>
+   document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("scrollToTop");
+
+      window.addEventListener("scroll", () => {
+         if (window.scrollY > 300) {
+            btn?.classList.remove("hidden");
+         } else {
+            btn?.classList.add("hidden");
+         }
+      });
+
+      btn?.addEventListener("click", () => {
+         window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+   });
+</script>
