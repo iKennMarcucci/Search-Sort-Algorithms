@@ -1,0 +1,25 @@
+---
+interface Props {
+   size?: number;
+   stroke?: number;
+}
+
+const { size = 24, stroke = 1.5 } = Astro.props;
+---
+
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   viewBox="0 0 24 24"
+   width={size}
+   height={size}
+   fill={"none"}
+>
+   <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width={stroke}
+   ></circle>
+   <path
+      d="M12 8V12L14 14"
+      stroke="currentColor"
+      stroke-width={stroke}
+      stroke-linecap="round"
+      stroke-linejoin="round"></path>
+</svg>
