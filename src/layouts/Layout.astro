@@ -6,6 +6,7 @@ import ScrollUpButton from "../components/ui/ScrollUpButton.astro";
 import "../styles/global.css";
 import "@fontsource/onest";
 import { getLangFromUrl } from "../i18n/utils";
+import Analytics from "@vercel/analytics/astro";
 
 const lang = getLangFromUrl(Astro.url);
 ---
@@ -16,7 +17,10 @@ const lang = getLangFromUrl(Astro.url);
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta
+			name="apple-mobile-web-app-status-bar-style"
+			content="black-translucent"
+		/>
 		<meta name="theme-color" content="#000000" />
 		<meta name="theme-color" content="#fff" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -32,6 +36,7 @@ const lang = getLangFromUrl(Astro.url);
 		<slot />
 		<Footer />
 		<ScrollUpButton />
+		<Analytics />
 	</body>
 </html>
 
