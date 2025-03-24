@@ -1,0 +1,38 @@
+---
+import Background from "../components/Background.astro";
+import Footer from "../components/layout/Footer.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import ScrollUpButton from "../components/ui/ScrollUpButton.astro";
+import "../styles/global.css";
+import "@fontsource/onest";
+import { getLangFromUrl } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<!doctype html>
+<html lang={lang} class="min-h-full w-full h-full m-0">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Search and Sort Algorithms</title>
+	</head>
+	<body
+		class="text-white w-full h-fit m-0 grid-rows-[auto_1fr_auto] min-h-[100dvh] grid"
+	>
+		<Background />
+
+		<Navbar />
+		<slot />
+		<Footer />
+		<ScrollUpButton />
+	</body>
+</html>
+
+<style is:global>
+	body {
+		font-family: "Onest", sans-serif;
+	}
+</style>
